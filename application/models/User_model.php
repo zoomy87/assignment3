@@ -19,12 +19,17 @@ class User_model extends CI_Model
         $insert_data = $this->db->insert('users', $data);
         return $insert_data;
     }
+    public function logg($msg) { 
+        echo "<script>console.log(".json_encode($msg).")</script>";
+    }
 
     public function login_user($username, $password)
     {
         $this->db->where('username', $username);
         // echo($username . " " . $password . "<br>");
+
         $result = $this->db->get('users');
+        echo "<script>console.log(".json_encode($result).")</script>";
         $db_password = $result->row(2)->password;
         
         if (password_verify($password, $db_password)) {
